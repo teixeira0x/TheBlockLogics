@@ -5,7 +5,6 @@ plugins {
 android {
   namespace 'com.raredev.theblocklogics'
   compileSdk 33
-  buildToolsVersion "34.0.4"
 
   defaultConfig {
     applicationId "com.raredev.theblocklogics"
