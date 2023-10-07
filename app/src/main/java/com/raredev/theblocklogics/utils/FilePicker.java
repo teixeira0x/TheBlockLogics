@@ -22,12 +22,7 @@ public class FilePicker {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
               if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
-                for (Map.Entry<Integer, PushCallback<Uri>> entry : callbacks.entrySet()) {
-                  if (entry.getKey() == CURRENT_RESULT_CODE) {
-                    entry.getValue().onComplete(result.getData().getData());
-                    break;
-                  }
-                }
+                callbacks.get(CURRENT_RESULT_CODE).onComplete(result.getData().getData());
               }
             });
   }
