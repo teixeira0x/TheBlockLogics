@@ -5,8 +5,8 @@
 <h2 align="center"><b>The Block Logics</b></h2>
 <p align="center">
   Create Android applications without writing code.
-<p>
-
+</p>
+  
 <br>
 
 <p align="center">
@@ -14,6 +14,8 @@
 <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License"></p>
 
 </p>
+
+<br>
 
 ## Thanks to
 - [Akash Yadav](https://github.com/itsaky) for the awesome [AndroidIDE](https://github.com/AndroidIDEOfficial/AndroidIDE)
