@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="?attr/dialogPreferredPadding"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginStart="?attr/dialogPreferredPadding">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:minHeight="90dp">
+
+                <ImageView
+                    android:layout_height="55dp"
+                    android:layout_width="55dp"
+                    android:src="@drawable/android_icon"
+                    android:id="@+id/choose_icon" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:hint="@string/enter_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="@dimen/dimen_5dp"
+                    app:hintAnimationEnabled="true"
+                    android:id="@+id/til_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:textSize="16sp"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        android:text="MyApplication"
+                        android:id="@+id/tie_name" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:id="@+id/advanced_options_toggle">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingEnd="@dimen/dimen_5dp"
+                    android:gravity="end"
+                    android:ellipsize="start"
+                    android:textSize="13sp"
+                    android:textColor="?attr/colorControlNormal"
+                    android:layout_weight="1.0"
+                    android:text="Advanced Options" />
+
+                <ImageView
+                    android:layout_height="15dp"
+                    android:layout_width="15dp"
+                    android:src="@drawable/ic_settings"
+                    android:tint="?attr/colorControlNormal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/advanced_options">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:hint="@string/enter_package"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    app:hintAnimationEnabled="true"
+                    android:id="@+id/til_package">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:textSize="16sp"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        android:text="com.my.myapplication"
+                        android:id="@+id/tie_package" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dimen_5dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:hint="@string/enter_version_code"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:hintAnimationEnabled="true"
+                        android:layout_weight="1.0"
+                        android:id="@+id/til_version_code">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"
+                            android:textSize="16sp"
+                            android:singleLine="true"
+                            android:inputType="numberDecimal"
+                            android:text="1"
+                            android:id="@+id/tie_version_code" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:hint="@string/enter_version_name"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_marginStart="@dimen/dimen_5dp"
+                        app:hintAnimationEnabled="true"
+                        android:layout_weight="1.0"
+                        android:id="@+id/til_version_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"
+                            android:textSize="16sp"
+                            android:singleLine="true"
+                            android:inputType="text"
+                            android:text="1.0"
+                            android:id="@+id/tie_version_name" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
