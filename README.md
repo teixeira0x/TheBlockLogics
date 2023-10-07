@@ -10,11 +10,10 @@
 <br>
 
 <p align="center">
-[![Debug Build](https://github.com/raredeveloper/TheBlockLogics/actions/workflows/debug_build.yml/badge.svg)](https://github.com/raredeveloper/TheBlockLogics/actions/workflows/debug_build.yml)
-</p>
-
 <!-- License -->
 <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License"></p>
+
+</p>
 
 ## Thanks to
 - [Akash Yadav](https://github.com/itsaky) for the awesome [AndroidIDE](https://github.com/AndroidIDEOfficial/AndroidIDE)
