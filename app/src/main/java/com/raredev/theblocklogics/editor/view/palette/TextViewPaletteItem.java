@@ -3,12 +3,11 @@ package com.raredev.theblocklogics.editor.view.palette;
 import android.widget.TextView;
 import com.raredev.theblocklogics.R;
 import com.raredev.theblocklogics.editor.view.data.ViewData;
-import com.raredev.theblocklogics.utils.Constants;
 
 public class TextViewPaletteItem extends PaletteItem {
 
   public TextViewPaletteItem() {
-    super(R.mipmap.ic_palette_text_view, Constants.TEXT_VIEW);
+    super(R.mipmap.ic_palette_text_view, "TextView");
   }
 
   @Override
@@ -19,7 +18,7 @@ public class TextViewPaletteItem extends PaletteItem {
   @Override
   public ViewData createViewData() {
     ViewData viewData = new ViewData(ViewData.TYPE_TEXT_VIEW);
-    viewData.text.text = Constants.TEXT_VIEW;
+    viewData.text.text = "TextView";
     return viewData;
   }
 }

@@ -3,9 +3,12 @@ package com.raredev.theblocklogics.editor.view.utils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.raredev.theblocklogics.R;
 import com.raredev.theblocklogics.editor.view.ViewEditorLayout;
 import com.raredev.theblocklogics.editor.view.data.ViewData;
+import com.raredev.theblocklogics.editor.view.data.ViewData.*;
 import com.raredev.theblocklogics.editor.view.views.LayoutItem;
 import com.raredev.theblocklogics.editor.view.views.ViewItem;
 import com.raredev.theblocklogics.utils.Constants;
@@ -13,6 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewEditorUtils {
+
+  static BiMap<Integer, String> views =
+      new ImmutableBiMap.Builder<Integer, String>()
+          .put(ViewData.TYPE_LINEAR_LAYOUT, "LinearLayout")
+          .put(ViewData.TYPE_FRAME_LAYOUT, "FrameLayout")
+          .put(ViewData.TYPE_RELATIVE_LAYOUT, "RelativeLayout")
+          .put(ViewData.TYPE_VSCROLL_VIEW, "ScrollView")
+          .put(ViewData.TYPE_HSCROLL_VIEW, "HorizontalScrollView")
+          .put(ViewData.TYPE_RADIO_GROUP, "RadioGroup")
+          .put(ViewData.TYPE_TEXT_VIEW, "TextView")
+          .put(ViewData.TYPE_EDIT_TEXT, "EditText")
+          .put(ViewData.TYPE_BUTTON, "Button")
+          .put(ViewData.TYPE_IMAGE_VIEW, "ImageView")
+          .put(ViewData.TYPE_CHECK_BOX, "CheckBox")
+          .put(ViewData.TYPE_RADIO_BUTTON, "RadioButton")
+          .put(ViewData.TYPE_SWITCH, "Switch")
+          .put(ViewData.TYPE_SEEK_BAR, "SeekBar")
+          .put(ViewData.TYPE_PROGRESS_BAR, "ProgressBar")
+          .build();
 
   public static List<ViewData> getViewsData(ViewEditorLayout editor) {
     List<ViewData> viewsData = new ArrayList<>();
@@ -86,40 +108,7 @@ public class ViewEditorUtils {
   }
 
   public static String getTagForType(int type) {
-    switch (type) {
-      case ViewData.TYPE_LINEAR_LAYOUT:
-        return Constants.LINEAR_LAYOUT;
-      case ViewData.TYPE_FRAME_LAYOUT:
-        return Constants.FRAME_LAYOUT;
-      case ViewData.TYPE_RELATIVE_LAYOUT:
-        return Constants.RELATIVE_LAYOUT;
-      case ViewData.TYPE_VSCROLL_VIEW:
-        return Constants.VSCROLL_VIEW;
-      case ViewData.TYPE_HSCROLL_VIEW:
-        return Constants.HSCROLL_VIEW;
-      case ViewData.TYPE_RADIO_GROUP:
-        return Constants.RADIO_GROUP;
-      case ViewData.TYPE_TEXT_VIEW:
-        return Constants.TEXT_VIEW;
-      case ViewData.TYPE_EDIT_TEXT:
-        return Constants.EDIT_TEXT;
-      case ViewData.TYPE_BUTTON:
-        return Constants.BUTTON;
-      case ViewData.TYPE_IMAGE_VIEW:
-        return Constants.IMAGE_VIEW;
-      case ViewData.TYPE_CHECK_BOX:
-        return Constants.CHECK_BOX;
-      case ViewData.TYPE_RADIO_BUTTON:
-        return Constants.RADIO_GROUP;
-      case ViewData.TYPE_SWITCH:
-        return Constants.SWITCH;
-      case ViewData.TYPE_SEEK_BAR:
-        return Constants.SEEK_BAR;
-      case ViewData.TYPE_PROGRESS_BAR:
-        return Constants.PROGRESS_BAR;
-      default:
-        return null;
-    }
+    return views.get(type);
   }
 
   public static String getIdForType(int type) {
@@ -151,7 +140,7 @@ public class ViewEditorUtils {
         return -1;
     }
   }
-  
+
   public static String getLayoutParamsString(int value) {
     if (value == LinearLayout.LayoutParams.MATCH_PARENT) {
       return Constants.MATCH_PARENT;

@@ -33,28 +33,12 @@ public class Constants {
   public static final String ROOT_ID = "root";
   public static final int LAYOUT_MIN_SIZE = SizeUtils.dp2px(32f);
 
-  public static final String LINEAR_LAYOUT = "LinearLayout";
-  public static final String FRAME_LAYOUT = "FrameLayout";
-  public static final String RELATIVE_LAYOUT = "RelativeLayout";
-  public static final String VSCROLL_VIEW = "ScrollView";
-  public static final String HSCROLL_VIEW = "HorizontalScrollView";
-  public static final String RADIO_GROUP = "RadioGroup";
-
-  public static final String TEXT_VIEW = "TextView";
-  public static final String EDIT_TEXT = "EditText";
-  public static final String BUTTON = "Button";
-  public static final String IMAGE_VIEW = "ImageView";
-  public static final String CHECK_BOX = "CheckBox";
-  public static final String SWITCH = "Switch";
-  public static final String SEEK_BAR = "SeekBar";
-  public static final String PROGRESS_BAR = "ProgressBar";
-
   public static final String MATCH_PARENT = "match_parent";
   public static final String WRAP_CONTENT = "wrap_content";
 
   public static final String VERTICAL = "vertical";
   public static final String HORIZONTAL = "horizontal";
-  
+
   public static final String DP = "dp";
   public static final String SP = "sp";
 
