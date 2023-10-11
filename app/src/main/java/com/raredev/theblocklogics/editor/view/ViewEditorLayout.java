@@ -97,9 +97,6 @@ public class ViewEditorLayout extends FrameLayout implements View.OnDragListener
         if (!(state instanceof PaletteItem || state instanceof ViewItem)) {
           return false;
         }
-        if (state instanceof ViewItem) {
-          ((LayoutItem) host).refreshChilds();
-        }
         placeView.defineStateLayoutParams(state);
         removeDraggedView = false;
         break;
@@ -116,17 +113,26 @@ public class ViewEditorLayout extends FrameLayout implements View.OnDragListener
         break;
       case DragEvent.ACTION_DRAG_ENDED:
         placeView.removeFromParent();
+        if (!(state instanceof ViewItem)) {
+          break;
+        }
         // Return the view being dragged
         // to the parent if "removeDraggedView" is false
-        if (state instanceof ViewItem && !removeDraggedView) {
-          var draggedView = (ViewItem) state;
-          if (draggedView.getView().getParent() == null && draggedView.getViewData().index >= 0) {
-            var draggedViewParent =
-                (LayoutItem) findViewItemById(draggedView.getViewData().parentId);
-            addViewItem(draggedViewParent, draggedView, draggedView.getViewData().index);
-          }
-        }
-        calculatedIndex = -1;
+        handler.post(
+            () -> {
+              if (!removeDraggedView) {
+                var draggedView = (ViewItem) state;
+                if (draggedView.getView().getParent() == null
+                    && draggedView.getViewData().index >= 0) {
+                  var draggedViewParent =
+                      (LayoutItem) findViewItemById(draggedView.getViewData().parentId);
+                  addViewItem(draggedViewParent, draggedView, draggedView.getViewData().index);
+                }
+              } else {
+                ((LayoutItem) host).refreshChilds();
+              }
+              calculatedIndex = -1;
+            });
         break;
       case DragEvent.ACTION_DROP:
         placeView.removeFromParent();
