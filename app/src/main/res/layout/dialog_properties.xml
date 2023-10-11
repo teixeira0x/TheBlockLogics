@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/bottom_shape"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_height="15dp"
+            android:layout_width="15dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_palette_linear_layout_vert"
+            android:tint="?attr/colorControlNormal"
+            android:layout_marginStart="10dp"
+            android:id="@+id/view_icon" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginStart="5dp"
+            android:id="@+id/view_id"
+            android:text="linear1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textSize="14sp"
+            android:paddingStart="8dp"
+            android:text="Properties" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:requiresFadingEdge="vertical"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/rv_properties" />
+
+    </LinearLayout>
+
+</LinearLayout>

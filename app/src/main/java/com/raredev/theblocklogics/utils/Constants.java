@@ -1,6 +1,7 @@
 package com.raredev.theblocklogics.utils;
 
 import com.blankj.utilcode.util.PathUtils;
+import com.blankj.utilcode.util.SizeUtils;
 
 public class Constants {
 
@@ -10,7 +11,10 @@ public class Constants {
 
   // Extra keys
   public static final String KEY_EXTRA_PROJECT = "key_extra_project";
+  public static final String KEY_EXTRA_SRC_LIST = "src_list";
   public static final String KEY_EXTRA_ERROR = "key_error_extra";
+  public static final String KEY_EXTRA_VIEW_DATA = "view_data";
+  public static final String KEY_EXTRA_SELECTED_FILE = "selected_file";
 
   // Project
   public static final String PROJECT_ICON_FILE_NAME = "app_icon.png";
@@ -23,4 +27,47 @@ public class Constants {
   // Paths
   public static final String DATA_DIR_PATH = PathUtils.getExternalAppDataPath() + "/files";
   public static final String PROJECTS_DIR_PATH = DATA_DIR_PATH + "/projects";
+
+  // View editor
+  public static final String MAIN = "main";
+  public static final String ROOT_ID = "root";
+  public static final int LAYOUT_MIN_SIZE = SizeUtils.dp2px(32f);
+
+  public static final String LINEAR_LAYOUT = "LinearLayout";
+  public static final String FRAME_LAYOUT = "FrameLayout";
+  public static final String RELATIVE_LAYOUT = "RelativeLayout";
+  public static final String VSCROLL_VIEW = "ScrollView";
+  public static final String HSCROLL_VIEW = "HorizontalScrollView";
+  public static final String RADIO_GROUP = "RadioGroup";
+
+  public static final String TEXT_VIEW = "TextView";
+  public static final String EDIT_TEXT = "EditText";
+  public static final String BUTTON = "Button";
+  public static final String IMAGE_VIEW = "ImageView";
+  public static final String CHECK_BOX = "CheckBox";
+  public static final String SWITCH = "Switch";
+  public static final String SEEK_BAR = "SeekBar";
+  public static final String PROGRESS_BAR = "ProgressBar";
+
+  public static final String MATCH_PARENT = "match_parent";
+  public static final String WRAP_CONTENT = "wrap_content";
+
+  public static final String VERTICAL = "vertical";
+  public static final String HORIZONTAL = "horizontal";
+  
+  public static final String DP = "dp";
+  public static final String SP = "sp";
+
+  // Properties
+  public static final String ID = "id";
+  public static final String WIDTH = "width";
+  public static final String HEIGHT = "height";
+  public static final String PADDING = "padding";
+  public static final String ORIENTATION = "orientation";
+  public static final String TEXT = "text";
+  public static final String HINT = "hint";
+
+  // Others
+  public static final String UNKNOWN = "Unknown";
+  public static final String UNDEFINED = "Undefined";
 }

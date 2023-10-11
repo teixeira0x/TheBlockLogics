@@ -5,11 +5,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-import com.blankj.utilcode.util.ThreadUtils;
 import com.raredev.theblocklogics.R;
 import com.raredev.theblocklogics.models.Project;
+import com.raredev.theblocklogics.tasks.Task;
 import com.raredev.theblocklogics.utils.Constants;
 import com.raredev.theblocklogics.utils.loaders.ProjectsLoader;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,11 +85,28 @@ public class MainViewModel extends ViewModel {
     if (getSelectedFragment().getValue() != Constants.HOME_FRAGMENT) {
       return;
     }
-    new Thread(
-            () -> {
-              List<Project> projects = ProjectsLoader.fetchProjects();
-              ThreadUtils.runOnUiThread(() -> setPojectsList(projects));
-            })
-        .start();
+    new LoadProjectsTask(this).start();
+  }
+
+  class LoadProjectsTask extends Task<List<Project>> {
+
+    private WeakReference<MainViewModel> weakReferenceViewModel;
+
+    public LoadProjectsTask(MainViewModel viewModel) {
+      weakReferenceViewModel = new WeakReference<>(viewModel);
+    }
+
+    @Override
+    public List<Project> doInBackground() {
+      return ProjectsLoader.fetchProjects();
+    }
+
+    @Override
+    public void onSuccess(List<Project> result) {
+      var viewModel = weakReferenceViewModel.get();
+      if (viewModel != null) {
+        viewModel.setPojectsList(result);
+      }
+    }
   }
 }

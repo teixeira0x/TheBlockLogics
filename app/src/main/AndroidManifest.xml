@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".app.TheBlockLogicsApp"
         android:allowBackup="true"
@@ -22,7 +25,15 @@
 
         <activity
             android:name=".activities.ProjectActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.ShowSrcCodeActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".activities.CrashActivity"

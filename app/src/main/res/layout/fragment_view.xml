@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent">
+
+    <com.raredev.theblocklogics.editor.view.ViewEditorLayout
+         android:layout_height="0dp"
+         android:layout_width="0dp"
+         android:layout_marginEnd="10dp"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent"
+         android:layout_marginStart="10dp"
+         android:id="@+id/view_editor" />
+
+    <TextView
+         android:layout_height="wrap_content"
+         android:layout_width="0dp"
+         android:gravity="center"
+         android:alpha="0.50"
+         android:padding="5dp"
+         app:layout_constraintStart_toStartOf="parent"
+         android:textColor="?attr/colorControlNormal"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent"
+         android:text="@string/swipe_right_for_widget_palette"
+         android:id="@+id/widget_palette_info" />
+
+    <LinearLayout
+         android:layout_height="0dp"
+         android:layout_width="wrap_content"
+         android:elevation="0.5px"
+         android:padding="5dp"
+         android:orientation="vertical"
+         android:layout_marginTop="20dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         android:layout_marginBottom="20dp"
+         android:gravity="center"
+         android:background="@drawable/remove_view_layout_shape"
+         app:layout_constraintTop_toTopOf="parent"
+         android:scaleY="0"
+         app:layout_constraintEnd_toEndOf="parent"
+         android:id="@+id/remove_view_area">
+
+        <ImageView
+             android:layout_height="15dp"
+             android:layout_width="15dp"
+             android:src="@drawable/ic_delete"
+             android:tint="?attr/colorControlNormal"
+             android:id="@+id/delete_image" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

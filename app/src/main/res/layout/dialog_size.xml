@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/radiogroup">
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="14sp"
+        android:id="@+id/rb_match_parent"
+        android:text="match_parent" />
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="14sp"
+        android:id="@+id/rb_wrap_content"
+        android:text="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:textSize="14sp"
+        android:id="@+id/rb_fixed_value"
+        android:text="Fixed value" />
+
+    <include
+        layout="@layout/dialog_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include_edit_text" />
+
+</RadioGroup>

@@ -45,6 +45,26 @@ public class Project implements Parcelable {
     return this.path + File.separator + Constants.PROJECT_CONFIG_FILE_NAME;
   }
 
+  public String getAppPath() {
+    return this.path + File.separator + "app";
+  }
+
+  public String getSrcPath() {
+    return getAppPath() + File.separator + "src";
+  }
+
+  public String getJavaPath() {
+    return getSrcPath() + File.separator + appPackage.replaceAll(".", File.separator);
+  }
+
+  public String getLayoutPath() {
+    return getSrcPath() + File.separator + "res/layout";
+  }
+
+  public String getBakPath() {
+    return this.path + File.separator + "bak";
+  }
+
   public String getPath() {
     return this.path;
   }

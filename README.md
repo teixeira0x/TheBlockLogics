@@ -6,7 +6,9 @@
 <p align="center">
   Create Android applications without writing code.
 </p>
-  
+<p align="center">
+  Based on Sketchware
+</p>
 <br>
 
 <p align="center">
@@ -17,5 +19,7 @@
 
 <br>
 
+
 ## Thanks to
+- [AndroidIDE](https://github.com/AndroidIDEOfficial/AndroidIDE) for the [android-tree-sitter](https://github.com/AndroidIDEOfficial/android-tree-sitter)
 - [Akash Yadav](https://github.com/itsaky) for the awesome [AndroidIDE](https://github.com/AndroidIDEOfficial/AndroidIDE)

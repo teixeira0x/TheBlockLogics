@@ -1,8 +1,15 @@
 package com.raredev.theblocklogics.utils;
 
+import android.content.Context;
+import com.raredev.theblocklogics.app.TheBlockLogicsApp;
+import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import com.raredev.theblocklogics.models.Project;
+import com.raredev.theblocklogics.viewmodel.ProjectViewModel;
+import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -10,7 +17,36 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileUtil {
-  
+
+  public static String readFromAsset(String path) {
+    try {
+      // Get the input stream from the asset
+      InputStream inputStream = TheBlockLogicsApp.getInstance().getAssets().open(path);
+
+      // Create a byte array output stream to store the read bytes
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+      // Create a buffer of 1024 bytes
+      byte[] _buf = new byte[1024];
+      int i;
+
+      // Read the bytes from the input stream, write them to the output stream and close the streams
+      while ((i = inputStream.read(_buf)) != -1) {
+        outputStream.write(_buf, 0, i);
+      }
+      outputStream.close();
+      inputStream.close();
+
+      // Return the content of the output stream as a String
+      return outputStream.toString();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    // If an exception occurred, return an empty String
+    return "";
+  }
+
   public static String readFile(String path) {
     return readFile(new File(path));
   }

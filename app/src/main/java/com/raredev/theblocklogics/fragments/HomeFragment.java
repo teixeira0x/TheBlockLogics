@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment implements ProjectsAdapter.ProjectLis
   @Override
   public void onProjectMenuClick(View v, Project project) {
     PopupMenu pm = new PopupMenu(requireContext(), v);
-    pm.inflate(R.menu.project_menu);
+    pm.inflate(R.menu.project_item_menu);
 
     pm.setOnMenuItemClickListener(
         (item) -> {
