@@ -2,7 +2,6 @@ package com.raredev.theblocklogics.managers;
 
 import android.text.TextUtils;
 import com.blankj.utilcode.util.EncodeUtils;
-import com.blankj.utilcode.util.ThrowableUtils;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
@@ -62,8 +61,7 @@ public class ProjectDataManager {
         files.add(new ProjectFile(Constants.MAIN));
       }
     } catch (Exception e) {
-      throw new LoadProjectErrorException(
-          "Unable to load project files list\n\n" + ThrowableUtils.getFullStackTrace(e));
+      throw new LoadProjectErrorException("Unable to load project files list", e);
     }
   }
 
@@ -93,8 +91,7 @@ public class ProjectDataManager {
         views.put(Constants.MAIN, new ArrayList<>());
       }
     } catch (Exception e) {
-      throw new LoadProjectErrorException(
-          "Unable to load project views list\n\n" + ThrowableUtils.getFullStackTrace(e));
+      throw new LoadProjectErrorException("Unable to load project views list", e);
     }
   }
 

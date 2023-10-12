@@ -98,9 +98,7 @@ public class HomeFragment extends Fragment implements ProjectsAdapter.ProjectLis
         (item) -> {
           var id = item.getItemId();
           if (id == R.id.menu_edit) {
-            new ConfigProjectDialog(
-                    (BaseActivity) requireActivity(), mainViewModel, getLayoutInflater(), project)
-                .show();
+            ConfigProjectDialog.Companion.newInstance(project).show(getChildFragmentManager(), null);
           } else if (id == R.id.menu_delete) {
             deleteProject(project);
           }

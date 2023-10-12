@@ -25,7 +25,7 @@ public class PaletteAdapter(
   val layoutInflater: LayoutInflater
 ): RecyclerView.Adapter<PaletteAdapter.VH>() {
 
-  private var palette: MutableList<PaletteItem> = ArrayList()
+  private val palette: MutableList<PaletteItem> = ArrayList()
 
   class VH(internal val binding: LayoutPalleteItemBinding):
     RecyclerView.ViewHolder(binding.root)
@@ -36,10 +36,9 @@ public class PaletteAdapter(
 
   override fun onBindViewHolder(holder: VH, position: Int) {
     holder.binding.apply {
-      var item = palette[position]
+      val item = palette[position]
       if (item is CategoryPaletteItem) {
         dragView.visibility = View.GONE
-        category.visibility = View.VISIBLE
         category.setText(item.name)
         return
       }

@@ -47,14 +47,17 @@ dependencies {
   coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
   implementation("androidx.appcompat:appcompat:1.6.1")
+  implementation("androidx.core:core:1.10.1")
+  implementation("androidx.core:core-ktx:1.10.0")
+  implementation("androidx.fragment:fragment-ktx:1.5.7")
   implementation("com.google.android.material:material:1.9.0")
   implementation("com.google.guava:guava:32.1.2-jre")
   implementation("com.google.code.gson:gson:2.10.1")
   implementation("com.blankj:utilcodex:1.31.1")
 
-  implementation platform("io.github.Rosemoe.sora-editor:bom:0.22.1-f7ee449-SNAPSHOT")
-  implementation "io.github.Rosemoe.sora-editor:editor"
-  implementation "io.github.Rosemoe.sora-editor:language-treesitter"
+  implementation(platform("io.github.Rosemoe.sora-editor:bom:0.22.1-f7ee449-SNAPSHOT"))
+  implementation("io.github.Rosemoe.sora-editor:editor")
+  implementation("io.github.Rosemoe.sora-editor:language-treesitter")
 
   implementation("com.itsaky.androidide:android-tree-sitter:3.4.0")
   implementation("com.itsaky.androidide:tree-sitter-java:3.4.0")

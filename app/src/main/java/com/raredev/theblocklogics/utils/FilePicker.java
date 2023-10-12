@@ -6,15 +6,12 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import com.raredev.theblocklogics.callback.PushCallback;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FilePicker {
 
-  private Map<Integer, PushCallback<Uri>> callbacks = new HashMap<>();
-  private ActivityResultLauncher<Intent> picker;
+  private final ActivityResultLauncher<Intent> picker;
 
-  private int CURRENT_RESULT_CODE = -1;
+  private PushCallback<Uri> callback;
 
   public FilePicker(AppCompatActivity activity) {
     picker =
@@ -22,26 +19,21 @@ public class FilePicker {
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
               if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
-                callbacks.get(CURRENT_RESULT_CODE).onComplete(result.getData().getData());
+                if (callback != null) {
+                  callback.onComplete(result.getData().getData());
+
+                  callback = null;
+                }
               }
             });
   }
 
   public void destroy() {
     picker.unregister();
-    callbacks.clear();
   }
 
-  public void addCallback(int resultCode, PushCallback<Uri> callback) {
-    callbacks.put(resultCode, callback);
-  }
-
-  public void removeCallback(int resultCode) {
-    callbacks.remove(resultCode);
-  }
-
-  public void launch(int resultCode, Intent intent) {
-    CURRENT_RESULT_CODE = resultCode;
+  public void launch(Intent intent, PushCallback<Uri> callback) {
+    this.callback = callback;
     picker.launch(intent);
   }
 }

@@ -57,7 +57,9 @@ public class MainActivity extends BaseActivity {
         });
 
     binding.fab.setOnClickListener(
-        v -> new ConfigProjectDialog(this, viewModel, getLayoutInflater()).show());
+        v ->
+            ConfigProjectDialog.Companion.newInstance(null)
+                .show(getSupportFragmentManager(), null));
 
     if (viewModel.getSelectedFragment().getValue() == -1
         && viewModel.getPreviousFragment().getValue() == -1) {

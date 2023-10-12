@@ -5,7 +5,11 @@ package com.raredev.theblocklogics.exceptions;
  */
 public class LoadProjectErrorException extends Exception {
 
-  public LoadProjectErrorException(String error) {
-    super(error);
+  public LoadProjectErrorException(String message) {
+    super(message);
+  }
+
+  public LoadProjectErrorException(String message, Throwable e) {
+    super(message, e);
   }
 }
