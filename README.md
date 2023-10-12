@@ -21,5 +21,6 @@
 
 
 ## Thanks to
+- [Rosemoe](https://github.com/Rosemoe) for the awesome [CodeEditor](https://github.com/Rosemoe/sora-editor)
 - [AndroidIDE](https://github.com/AndroidIDEOfficial/AndroidIDE) for the [android-tree-sitter](https://github.com/AndroidIDEOfficial/android-tree-sitter)
 - [Akash Yadav](https://github.com/itsaky) for the awesome [AndroidIDE](https://github.com/AndroidIDEOfficial/AndroidIDE)
