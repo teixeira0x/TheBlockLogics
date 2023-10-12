@@ -96,7 +96,7 @@ public class ProjectsLoader {
       new Comparator<Project>() {
         @Override
         public int compare(Project p1, Project p2) {
-          return p2.getProjectDirName().compareTo(p1.getProjectDirName());
+          return p2.getProjectCode().compareTo(p1.getProjectCode());
         }
       };
 }

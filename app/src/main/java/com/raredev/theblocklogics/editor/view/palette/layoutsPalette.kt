@@ -24,7 +24,7 @@ class LinearVPaletteItem(): PaletteItem(
 ) {
   override fun createViewData(): ViewData {
     return ViewData(ViewData.TYPE_LINEAR_LAYOUT).apply {
-        width = LinearLayout.LayoutParams.MATCH_PARENT
+        height = LinearLayout.LayoutParams.MATCH_PARENT
         layout.orientation = LinearLayout.VERTICAL
       }
   }

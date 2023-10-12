@@ -60,18 +60,20 @@ public class ViewEditorUtils {
   }
 
   public static void convertViewDataList(ViewEditorLayout editor, List<ViewData> views) {
-    for (ViewData data : views) {
-      // Create ViewItem
-      ViewItem view = ViewItemCreator.createView(editor.getContext(), data);
+    if (views != null && !views.isEmpty()) {
+      for (ViewData data : views) {
+        // Create ViewItem
+        ViewItem view = ViewItemCreator.createView(editor.getContext(), data);
 
-      // Apply the view's saved properties
-      PropertiesApplicator.applyViewProperties(view);
+        // Apply the view's saved properties
+        PropertiesApplicator.applyViewProperties(view);
 
-      // Set default listeners
-      editor.setListeners(view.getView());
+        // Set default listeners
+        editor.setListeners(view.getView());
 
-      // Add child to parent
-      addView(editor, view);
+        // Add child to parent
+        addView(editor, view);
+      }
     }
   }
 

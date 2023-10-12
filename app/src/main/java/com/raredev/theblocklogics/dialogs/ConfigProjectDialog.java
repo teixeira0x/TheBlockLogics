@@ -166,7 +166,7 @@ public class ConfigProjectDialog {
       throws JSONException {
     var projectsDir = new File(Constants.PROJECTS_DIR_PATH);
     var projectName =
-        project != null ? project.getProjectDirName() : getNewProjectName(projectsDir);
+        project != null ? project.getProjectCode() : getNewProjectCode(projectsDir);
     var projectDir = new File(projectsDir, File.separator + projectName);
     if (!projectDir.exists()) {
       projectDir.mkdirs();
@@ -191,7 +191,7 @@ public class ConfigProjectDialog {
     }
   }
 
-  private int getNewProjectName(File projectsDir) {
+  private int getNewProjectCode(File projectsDir) {
     int maxCount = 600;
 
     var projectDirsList = projectsDir.listFiles((f, unused) -> f.isDirectory());

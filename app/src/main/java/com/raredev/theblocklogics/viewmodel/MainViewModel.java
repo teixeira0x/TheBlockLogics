@@ -97,7 +97,7 @@ public class MainViewModel extends ViewModel {
     }
 
     @Override
-    public List<Project> doInBackground() {
+    public List<Project> doInBackground() throws Exception {
       return ProjectsLoader.fetchProjects();
     }
 

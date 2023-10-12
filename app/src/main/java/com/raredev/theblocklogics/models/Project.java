@@ -9,7 +9,7 @@ import java.io.File;
 public class Project implements Parcelable {
 
   private String path;
-  private String projectDirName;
+  private String projectCode;
 
   private String appName;
   private String appPackage;
@@ -19,7 +19,7 @@ public class Project implements Parcelable {
 
   public Project(Parcel parcel) {
     path = parcel.readString();
-    projectDirName = parcel.readString();
+    projectCode = parcel.readString();
     appName = parcel.readString();
     appPackage = parcel.readString();
     versionCode = parcel.readInt();
@@ -34,7 +34,7 @@ public class Project implements Parcelable {
     this.versionCode = versionCode;
     this.versionName = versionName;
 
-    this.projectDirName = FileUtil.getLastSegmentFromPath(path);
+    this.projectCode = FileUtil.getLastSegmentFromPath(path);
   }
 
   public String getAppIconPath() {
@@ -73,12 +73,8 @@ public class Project implements Parcelable {
     this.path = path;
   }
 
-  public String getProjectDirName() {
-    return this.projectDirName;
-  }
-
-  public void setProjectDirName(String projectDirName) {
-    this.projectDirName = projectDirName;
+  public String getProjectCode() {
+    return this.projectCode;
   }
 
   public String getAppName() {
@@ -135,7 +131,7 @@ public class Project implements Parcelable {
   @Override
   public void writeToParcel(Parcel parcel, int args) {
     parcel.writeString(path);
-    parcel.writeString(projectDirName);
+    parcel.writeString(projectCode);
     parcel.writeString(appName);
     parcel.writeString(appPackage);
     parcel.writeInt(versionCode);

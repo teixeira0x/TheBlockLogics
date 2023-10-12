@@ -212,17 +212,40 @@ public class ProjectActivity extends BaseActivity {
     }
 
     @Override
-    public Void doInBackground() {
-      ProjectDataManager.loadProject(project);
+    public Void doInBackground() throws Exception {
+      // Load widget palette
       paletteAdapter.ensurePalette();
+
+      ProjectDataManager.loadProjectFiles(project);
+      ProjectDataManager.loadProjectViews(project);
       return null;
     }
 
     @Override
-    public void onFinish() {
+    public void onSuccess(Void result) {
       getSupportActionBar().setTitle(project.getAppName());
-      getSupportActionBar().setSubtitle(project.getProjectDirName());
+      getSupportActionBar().setSubtitle(project.getProjectCode());
       viewModel.setSelectedFileName(Constants.MAIN);
+    }
+
+    @Override
+    public void onFail(Exception e) {
+      new MaterialAlertDialogBuilder(ProjectActivity.this)
+          .setTitle("Unable to load project")
+          .setMessage(
+              "Project name: "
+                  + project.getAppName()
+                  + ".\nProject code: "
+                  + project.getProjectCode()
+                  + ".\nException error:\n\n"
+                  + e.getLocalizedMessage())
+          .setCancelable(false)
+          .setPositiveButton(R.string.exit_project, (d, w) -> finish())
+          .show();
+    }
+
+    @Override
+    public void onFinish() {
       dismissProgress();
     }
   }
@@ -241,7 +264,7 @@ public class ProjectActivity extends BaseActivity {
     }
 
     @Override
-    public Void doInBackground() {
+    public Void doInBackground() throws Exception {
       saveFragmentsFileData();
       ProjectDataManager.writeProjectData(project.getPath());
       return null;
@@ -249,10 +272,10 @@ public class ProjectActivity extends BaseActivity {
 
     @Override
     public void onFinish() {
-      dismissProgress();
       if (afterSave != null) {
         afterSave.run();
       }
+      dismissProgress();
     }
   }
 
@@ -270,7 +293,7 @@ public class ProjectActivity extends BaseActivity {
     }
 
     @Override
-    public ArrayList<SrcFile> doInBackground() {
+    public ArrayList<SrcFile> doInBackground() throws Exception {
       saveFragmentsFileData();
       ArrayList<SrcFile> sources = new ArrayList<>();
 
