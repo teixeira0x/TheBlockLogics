@@ -1,5 +1,6 @@
 package com.raredev.theblocklogics.editor.view.utils;
 
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -17,24 +18,25 @@ import java.util.List;
 
 public class ViewEditorUtils {
 
-  static BiMap<Integer, String> views =
-      new ImmutableBiMap.Builder<Integer, String>()
-          .put(ViewData.TYPE_LINEAR_LAYOUT, "LinearLayout")
-          .put(ViewData.TYPE_FRAME_LAYOUT, "FrameLayout")
-          .put(ViewData.TYPE_RELATIVE_LAYOUT, "RelativeLayout")
-          .put(ViewData.TYPE_VSCROLL_VIEW, "ScrollView")
-          .put(ViewData.TYPE_HSCROLL_VIEW, "HorizontalScrollView")
-          .put(ViewData.TYPE_RADIO_GROUP, "RadioGroup")
-          .put(ViewData.TYPE_TEXT_VIEW, "TextView")
-          .put(ViewData.TYPE_EDIT_TEXT, "EditText")
-          .put(ViewData.TYPE_BUTTON, "Button")
-          .put(ViewData.TYPE_IMAGE_VIEW, "ImageView")
-          .put(ViewData.TYPE_CHECK_BOX, "CheckBox")
-          .put(ViewData.TYPE_RADIO_BUTTON, "RadioButton")
-          .put(ViewData.TYPE_SWITCH, "Switch")
-          .put(ViewData.TYPE_SEEK_BAR, "SeekBar")
-          .put(ViewData.TYPE_PROGRESS_BAR, "ProgressBar")
-          .build();
+  private static SparseArray<String> views = new SparseArray<>();
+
+  static {
+    views.append(ViewData.TYPE_LINEAR_LAYOUT, "LinearLayout");
+    views.append(ViewData.TYPE_FRAME_LAYOUT, "FrameLayout");
+    views.append(ViewData.TYPE_RELATIVE_LAYOUT, "RelativeLayout");
+    views.append(ViewData.TYPE_VSCROLL_VIEW, "ScrollView");
+    views.append(ViewData.TYPE_HSCROLL_VIEW, "HorizontalScrollView");
+    views.append(ViewData.TYPE_RADIO_GROUP, "RadioGroup");
+    views.append(ViewData.TYPE_TEXT_VIEW, "TextView");
+    views.append(ViewData.TYPE_EDIT_TEXT, "EditText");
+    views.append(ViewData.TYPE_BUTTON, "Button");
+    views.append(ViewData.TYPE_IMAGE_VIEW, "ImageView");
+    views.append(ViewData.TYPE_CHECK_BOX, "CheckBox");
+    views.append(ViewData.TYPE_RADIO_BUTTON, "RadioButton");
+    views.append(ViewData.TYPE_SWITCH, "Switch");
+    views.append(ViewData.TYPE_SEEK_BAR, "SeekBar");
+    views.append(ViewData.TYPE_PROGRESS_BAR, "ProgressBar");
+  }
 
   public static List<ViewData> getViewsData(ViewEditorLayout editor) {
     List<ViewData> viewsData = new ArrayList<>();
