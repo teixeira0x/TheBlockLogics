@@ -97,6 +97,9 @@ public class ViewEditorLayout extends FrameLayout implements View.OnDragListener
         if (!(state instanceof PaletteItem || state instanceof ViewItem)) {
           return false;
         }
+        if (state instanceof ViewItem) {
+          ((LayoutItem) host).refreshChilds();
+        }
         placeView.defineStateLayoutParams(state);
         removeDraggedView = false;
         break;
@@ -128,8 +131,6 @@ public class ViewEditorLayout extends FrameLayout implements View.OnDragListener
                       (LayoutItem) findViewItemById(draggedView.getViewData().parentId);
                   addViewItem(draggedViewParent, draggedView, draggedView.getViewData().index);
                 }
-              } else {
-                ((LayoutItem) host).refreshChilds();
               }
               calculatedIndex = -1;
             });

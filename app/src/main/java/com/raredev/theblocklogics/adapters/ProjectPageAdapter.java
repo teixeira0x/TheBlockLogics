@@ -20,9 +20,9 @@ public class ProjectPageAdapter extends FragmentStateAdapter {
   @Override
   public Fragment createFragment(int position) {
     if (position == 0) {
-      return ViewFragment.newInstance();
+      return ViewFragment.Companion.newInstance();
     }
-    return BlankFragment.newInstance();
+    return BlankFragment.Companion.newInstance();
   }
 
   @Override

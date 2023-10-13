@@ -52,9 +52,8 @@ public class PaletteAdapter(
         if (ViewCompat.startDragAndDrop(dragView, ClipData.newPlainText("", ""), View.DragShadowBuilder(dragView), item, 0)) {
           drawerLayout.closeDrawer(GravityCompat.START)
           VibrateUtils.vibrate(100)
-          true
         }
-        false
+        true
       }
     }
   }

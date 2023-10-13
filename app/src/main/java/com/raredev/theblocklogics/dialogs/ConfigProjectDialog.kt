@@ -9,10 +9,8 @@ import android.text.Editable
 import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.fragment.app.DialogFragment
@@ -30,6 +28,10 @@ import com.raredev.theblocklogics.utils.OnTextChangedWatcher
 import com.raredev.theblocklogics.utils.UriUtils
 import com.raredev.theblocklogics.viewmodel.MainViewModel
 import java.io.File;
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.launch
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,18 +44,22 @@ class ConfigProjectDialog(): DialogFragment() {
   private val binding: DialogNewProjectBinding
     get() = checkNotNull(_binding)
 
-  private lateinit var dialog: AlertDialog
-  private var showAdvancedOptions: Boolean = false
+  private val pickMedia = registerForActivityResult(PickVisualMedia()) {
+      if (it != null) {
+        val drawable = UriUtils.convertUriToDrawable(it)
+        binding.chooseIcon.setImageDrawable(drawable)
+      }
+    }
 
+  private val textWatcher = object : OnTextChangedWatcher() {
+      override fun afterTextChanged(editable: Editable) {
+        verifyDetails()
+      }
+    }
+
+  private lateinit var dialog: AlertDialog
+  private var showAdvancedOptions: Boolean = true
   private var project: Project? = null
-  private var pickMedia: ActivityResultLauncher<PickVisualMediaRequest> =
-      registerForActivityResult(ActivityResultContracts.PickVisualMedia(),
-        { uri ->
-          if (uri != null) {
-            val drawable = UriUtils.convertUriToDrawable(uri)
-            binding.chooseIcon.setImageDrawable(drawable)
-          }
-        })
 
   companion object {
     const val APP_NAME_PATTERN = "^[a-zA-Z0-9 ]+$"
@@ -80,7 +86,7 @@ class ConfigProjectDialog(): DialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     _binding = DialogNewProjectBinding.inflate(layoutInflater)
-    toggleAdvancedOptionsVisibility(false)
+    toggleAdvancedOptionsVisibility()
     setProjectDetails()
 
     val builder = MaterialAlertDialogBuilder(requireContext())
@@ -91,7 +97,7 @@ class ConfigProjectDialog(): DialogFragment() {
 
     dialog = builder.create()
     dialog.setOnShowListener {
-      addTextWatchers()
+      addTextWatcher()
       verifyDetails()
       setListeners()
     }
@@ -115,7 +121,8 @@ class ConfigProjectDialog(): DialogFragment() {
     }
   }
 
-  private fun addTextWatchers() {
+  /** Add text watcher for all EditText  */
+  private fun addTextWatcher() {
     binding.apply {
       setEditTextWatcher(tieName)
       setEditTextWatcher(tiePackage)
@@ -127,59 +134,75 @@ class ConfigProjectDialog(): DialogFragment() {
   private fun setEditTextWatcher(editText: EditText) {
     editText.addTextChangedListener(textWatcher)
   }
-  
-  private val textWatcher = object : OnTextChangedWatcher() {
-      override fun afterTextChanged(editable: Editable) {
-        verifyDetails()
-      }
-    }
 
+  /** Add click listeners */
   private fun setListeners() {
-    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener { dismiss() }
-    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener {
+      setPositiveButtonEnabled(false)
       dismiss()
-      try {
-        if (!isValidDetails()) {
-          return@setOnClickListener
+    }
+    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+      if (!isValidDetails()) {
+        return@setOnClickListener
+      }
+      setPositiveButtonEnabled(false)
+      CoroutineScope(Dispatchers.IO).launch {
+        try {
+          // Write or rewrite the project
+          val writtenProject = writeProject(
+            binding.tieName.text.toString(),
+            binding.tiePackage.text.toString(),
+            binding.tieVersionCode.text.toString().toInt(),
+            binding.tieVersionName.text.toString()
+          )
+
+          withContext(Dispatchers.Main) {
+            // checks if a project is being edited
+            if (project == null) {
+              // If there is no project being edited, start the 'ProjectActivity'
+              val intent = Intent(requireContext(), ProjectActivity::class.java)
+              intent.putExtra(Constants.KEY_EXTRA_PROJECT, writtenProject)
+              startActivity(intent)
+            } else {
+              // If a project is being edited, update the project list
+              if (viewModel.selectedFragment.value != Constants.HOME_FRAGMENT) {
+                viewModel.setFragment(Constants.HOME_FRAGMENT)
+              } else {
+                viewModel.loadProjects()
+              }
+            }
+            dismiss()
+          }
+        } catch (e: JSONException) {
+          e.printStackTrace()
         }
-        writeProject(
-          binding.tieName.text.toString(),
-          binding.tiePackage.text.toString(),
-          binding.tieVersionCode.text.toString().toInt(),
-          binding.tieVersionName.text.toString()
-        )
-        if (viewModel.selectedFragment.value != Constants.HOME_FRAGMENT) {
-          viewModel.setSelectedFragment(Constants.HOME_FRAGMENT)
-          return@setOnClickListener
-        }
-        viewModel.loadProjects()
-      } catch (e: JSONException) {
-        e.printStackTrace()
       }
     }
 
     binding.apply {
       chooseIcon.setOnClickListener {
+        // Launch the media picker to get an image
         pickMedia.launch(
           PickVisualMediaRequest.Builder()
-          .setMediaType(ActivityResultContracts.PickVisualMedia.SingleMimeType(MIME_TYPE))
+          .setMediaType(PickVisualMedia.SingleMimeType(MIME_TYPE))
           .build()
         );
       }
       advancedOptionsToggle.setOnClickListener {
-        toggleAdvancedOptionsVisibility(!showAdvancedOptions)
+        // Changes the visibility of the advanced options
+        toggleAdvancedOptionsVisibility()
       }
     }
   }
 
-  private fun toggleAdvancedOptionsVisibility(showing: Boolean) {
-    this.showAdvancedOptions = showing
+  private fun toggleAdvancedOptionsVisibility() {
+    this.showAdvancedOptions = !showAdvancedOptions
 
     binding.advancedOptions.visibility =
         if (showAdvancedOptions) View.VISIBLE else View.GONE
   }
 
-  private fun writeProject(appName: String, appPackage: String, versionCode: Int, versionName: String) {
+  private suspend fun writeProject(appName: String, appPackage: String, versionCode: Int, versionName: String): Project {
     val projectsDir = File(Constants.PROJECTS_DIR_PATH)
     val projectCode = project?.projectCode ?: getNewProjectCode(projectsDir).toString()
     val projectDir = File(projectsDir, projectCode)
@@ -201,12 +224,7 @@ class ConfigProjectDialog(): DialogFragment() {
     writeBitmapDrawableImage(iconFile.absolutePath, binding.chooseIcon.getDrawable())
     writeFile(configFile.absolutePath, configJson.toString())
 
-    if (project == null) {
-      val intent = Intent(requireContext(), ProjectActivity::class.java)
-      val projectToOpen = Project(projectDir.absolutePath, appName, appPackage, versionCode, versionName)
-      intent.putExtra(Constants.KEY_EXTRA_PROJECT, projectToOpen)
-      startActivity(intent)
-    }
+    return Project(projectDir.absolutePath, appName, appPackage, versionCode, versionName)
   }
 
   private fun getNewProjectCode(projectsDir: File): Int {
@@ -226,11 +244,7 @@ class ConfigProjectDialog(): DialogFragment() {
   }
 
   private fun verifyDetails() {
-    if (!isValidName() || !isValidPackage() || !isValidVersionCode()  || !isValidVersionName()) {
-      setPositiveButtonEnabled(false)
-    } else {
-      setPositiveButtonEnabled(true)
-    }
+    setPositiveButtonEnabled(isValidName() && isValidPackage() && isValidVersionCode()  && isValidVersionName())
   }
 
   private fun isValidDetails(): Boolean {
@@ -300,6 +314,6 @@ class ConfigProjectDialog(): DialogFragment() {
   }
 
   private fun setPositiveButtonEnabled(enabled: Boolean) {
-    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(enabled)
+    dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = enabled
   }
 }
