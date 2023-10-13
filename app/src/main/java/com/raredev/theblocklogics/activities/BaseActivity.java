@@ -7,13 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.color.MaterialColors;
 import com.raredev.theblocklogics.R;
 import com.raredev.theblocklogics.dialogs.ProgressDialogBuilder;
-import com.raredev.theblocklogics.utils.FilePicker;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
   private ProgressDialogBuilder progressDlgBuilder;
   private AlertDialog progressDlg;
-  private FilePicker filePicker;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     progressDlgBuilder = new ProgressDialogBuilder(this);
     progressDlgBuilder.setMessage(R.string.please_wait);
     progressDlg = progressDlgBuilder.create();
-    filePicker = new FilePicker(this);
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    filePicker.destroy();
   }
 
   public void showNonCancelableProgress() {
@@ -59,9 +50,5 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   public AlertDialog getProgressDialog() {
     return progressDlg;
-  }
-
-  public FilePicker getFilePicker() {
-    return filePicker;
   }
 }
