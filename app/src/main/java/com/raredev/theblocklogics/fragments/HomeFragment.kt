@@ -81,14 +81,13 @@ class HomeFragment: Fragment() {
     val pm = PopupMenu(requireContext(), v)
     pm.inflate(R.menu.project_item_menu)
 
-    pm.setOnMenuItemClickListener() { item ->
-      val id = item.itemId
-      if (id == R.id.menu_edit) {
-        ConfigProjectDialog.Companion.newInstance(project).show(childFragmentManager, null)
-      } else if (id == R.id.menu_delete) {
-        deleteProject(project)
+    pm.setOnMenuItemClickListener() {
+      when (it.itemId) {
+        R.id.menu_config -> ConfigProjectDialog.Companion.newInstance(project).show(childFragmentManager, null)
+        R.id.menu_delete -> deleteProject(project)
+        else -> false
       }
-      false
+      true
     }
     pm.show()
   }

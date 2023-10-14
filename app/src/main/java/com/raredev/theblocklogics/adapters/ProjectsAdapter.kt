@@ -41,8 +41,8 @@ public class ProjectsAdapter(
           listener.onProjectClick(project)
         }
 
-        menu.setOnClickListener { v ->
-          listener.onProjectMenuClick(v, project)
+        menu.setOnClickListener {
+          listener.onProjectMenuClick(it, project)
         }
       }
     }

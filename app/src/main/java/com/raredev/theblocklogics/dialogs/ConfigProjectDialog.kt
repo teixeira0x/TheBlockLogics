@@ -12,6 +12,7 @@ import android.widget.EditText
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -91,7 +92,7 @@ class ConfigProjectDialog(): DialogFragment() {
 
     val builder = MaterialAlertDialogBuilder(requireContext())
     builder.setView(binding.root)
-    builder.setTitle(if (project != null) R.string.edit_project else R.string.new_project)
+    builder.setTitle(if (project != null) R.string.config_project else R.string.new_project)
     builder.setNegativeButton(R.string.cancel, null)
     builder.setPositiveButton(if (project != null) R.string.save else R.string.create, null)
 
@@ -186,7 +187,7 @@ class ConfigProjectDialog(): DialogFragment() {
           PickVisualMediaRequest.Builder()
           .setMediaType(PickVisualMedia.SingleMimeType(MIME_TYPE))
           .build()
-        );
+        )
       }
       advancedOptionsToggle.setOnClickListener {
         // Changes the visibility of the advanced options
@@ -197,9 +198,7 @@ class ConfigProjectDialog(): DialogFragment() {
 
   private fun toggleAdvancedOptionsVisibility() {
     this.showAdvancedOptions = !showAdvancedOptions
-
-    binding.advancedOptions.visibility =
-        if (showAdvancedOptions) View.VISIBLE else View.GONE
+    binding.advancedOptions.isVisible = showAdvancedOptions
   }
 
   private suspend fun writeProject(appName: String, appPackage: String, versionCode: Int, versionName: String): Project {

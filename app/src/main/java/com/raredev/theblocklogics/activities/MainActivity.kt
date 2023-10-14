@@ -43,11 +43,10 @@ public class MainActivity: BaseActivity() {
     }
 
     binding.bottomNavigation.setOnItemSelectedListener() {
-      val id = it.itemId
-      if (id == R.id.menu_home) {
-        viewModel.setFragment(Constants.HOME_FRAGMENT)
-      } else if (id == R.id.menu_settings) {
-        viewModel.setFragment(Constants.SETTINGS_FRAGMENT)
+      when (it.itemId) {
+        R.id.menu_home -> viewModel.setFragment(Constants.HOME_FRAGMENT)
+        R.id.menu_settings -> viewModel.setFragment(Constants.SETTINGS_FRAGMENT)
+        else -> false
       }
       true
     }

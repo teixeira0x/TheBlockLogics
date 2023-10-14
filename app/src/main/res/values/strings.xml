@@ -26,7 +26,7 @@
     <string name="component">Component</string>
     <string name="show_source_code">Show Source Code</string>
 
-    <string name="edit_project">Edit Project</string>
+    <string name="config_project">Configure project</string>
     <string name="delete_project">Delete Project</string>
     <string name="delete_project_message">Are you sure you want to delete the project %1$s?</string>
 
