@@ -37,13 +37,13 @@ public class MainActivity: BaseActivity() {
     super.onCreate(savedInstanceState)
     setSupportActionBar(binding.toolbar)
 
-    viewModel.selectedFragment.observe(this, this::onSelectFragment)
-    viewModel.navSelectedItemId.observe(this) { id ->
-      binding.bottomNavigation.setSelectedItemId(id)
+    viewModel.selectedFragment.observe(this, this::onChangeSelectedFragment)
+    viewModel.navSelectedItemId.observe(this) {
+      binding.bottomNavigation.setSelectedItemId(it)
     }
 
-    binding.bottomNavigation.setOnItemSelectedListener() { item ->
-      val id = item.itemId
+    binding.bottomNavigation.setOnItemSelectedListener() {
+      val id = it.itemId
       if (id == R.id.menu_home) {
         viewModel.setFragment(Constants.HOME_FRAGMENT)
       } else if (id == R.id.menu_settings) {
@@ -57,7 +57,7 @@ public class MainActivity: BaseActivity() {
     if (viewModel.selectedFragment.value == -1 && viewModel.previousFragment.value == -1) {
       viewModel.setFragment(Constants.HOME_FRAGMENT)
     } else {
-      onSelectFragment(viewModel.selectedFragment.value)
+      onChangeSelectedFragment(viewModel.selectedFragment.value)
     }
     onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
   }
@@ -67,7 +67,7 @@ public class MainActivity: BaseActivity() {
     _binding = null
   }
 
-  private fun onSelectFragment(fragmentIndex: Int?) {
+  private fun onChangeSelectedFragment(fragmentIndex: Int?) {
     var selectedFragment = when (fragmentIndex) {
       Constants.HOME_FRAGMENT -> binding.home
       Constants.SETTINGS_FRAGMENT -> binding.settings

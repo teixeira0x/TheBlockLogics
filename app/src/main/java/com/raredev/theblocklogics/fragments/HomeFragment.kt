@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,20 +52,18 @@ class HomeFragment: Fragment() {
     binding.rvProjects.layoutManager = LinearLayoutManager(requireContext())
     binding.rvProjects.adapter = adapter
 
-    viewModel.projects.observe(viewLifecycleOwner) {
-      if (it != null) {
-        binding.noProjects.setVisibility(if (it.isEmpty()) View.VISIBLE else View.GONE)
-        adapter.notifyDataSetChanged()
-      } else {
-        binding.noProjects.setVisibility(View.GONE)
-      }
+    binding.root.setOnRefreshListener {
+      binding.root.isRefreshing = false
+      viewModel.loadProjects()
     }
 
-    viewModel.selectedFragment.observe(viewLifecycleOwner) {
-      if (it != Constants.HOME_FRAGMENT) {
-        return@observe
+    viewModel.projects.observe(viewLifecycleOwner) {
+      if (it != null) {
+        binding.noProjects.isVisible = it.isEmpty()
+        adapter.notifyDataSetChanged()
+      } else {
+        binding.noProjects.isVisible = false
       }
-      viewModel.loadProjects()
     }
   }
 

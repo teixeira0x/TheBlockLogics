@@ -3,11 +3,11 @@ package com.raredev.theblocklogics.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.raredev.theblocklogics.R
 import com.raredev.theblocklogics.models.Project
 import com.raredev.theblocklogics.utils.Constants
 import com.raredev.theblocklogics.utils.loaders.ProjectsLoader
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
@@ -60,13 +60,11 @@ class MainViewModel: ViewModel() {
   }
 
   fun loadProjects() {
-    if (_selectedFragment.value == Constants.HOME_FRAGMENT) {
-      CoroutineScope(Dispatchers.IO).launch {
-        val projects = ProjectsLoader.fetchProjects()
+    viewModelScope.launch(Dispatchers.IO) {
+      val projects = ProjectsLoader.fetchProjects()
 
-        withContext(Dispatchers.Main) {
-          setProjects(projects)
-        }
+      withContext(Dispatchers.Main) {
+        setProjects(projects)
       }
     }
   }
