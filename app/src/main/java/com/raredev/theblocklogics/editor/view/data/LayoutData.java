@@ -2,14 +2,19 @@ package com.raredev.theblocklogics.editor.view.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.Gravity;
 import android.widget.LinearLayout;
 
 public class LayoutData implements Parcelable {
 
   public int orientation;
+  public int layoutGravity;
+  public int gravity;
 
   public LayoutData() {
     orientation = LinearLayout.VERTICAL;
+    layoutGravity = Gravity.NO_GRAVITY;
+    gravity = Gravity.NO_GRAVITY;
   }
 
   public static final Creator<LayoutData> CREATOR =

@@ -1,6 +1,7 @@
 package com.raredev.theblocklogics.editor.source;
 
 import android.text.TextUtils;
+import android.view.Gravity;
 import com.raredev.theblocklogics.editor.view.data.ViewData;
 import com.raredev.theblocklogics.editor.view.utils.Attributes;
 import com.raredev.theblocklogics.editor.view.utils.ViewEditorUtils;
@@ -38,9 +39,23 @@ public class XMLSourceCodeGenerator {
 
     addAttribute(attrDepth, Attributes.View.Id, "@+id/" + viewData.id);
     addAttribute(
-        attrDepth, Attributes.View.Width, ViewEditorUtils.getLayoutParamsString(viewData.width));
+        attrDepth, Attributes.View.Width, ViewEditorUtils.layoutParamsToString(viewData.width));
     addAttribute(
-        attrDepth, Attributes.View.Height, ViewEditorUtils.getLayoutParamsString(viewData.height));
+        attrDepth, Attributes.View.Height, ViewEditorUtils.layoutParamsToString(viewData.height));
+
+    if (viewData.layout.layoutGravity != Gravity.NO_GRAVITY) {
+      addAttribute(
+          attrDepth,
+          Attributes.View.LayoutGravity,
+          ViewEditorUtils.gravityToString(viewData.layout.layoutGravity));
+    }
+
+    if (viewData.layout.gravity != Gravity.NO_GRAVITY) {
+      addAttribute(
+          attrDepth,
+          Attributes.View.Gravity,
+          ViewEditorUtils.gravityToString(viewData.layout.gravity));
+    }
 
     addPaddingAttributes(attrDepth, viewData);
 
@@ -54,7 +69,10 @@ public class XMLSourceCodeGenerator {
         addTextViewAttributes(attrDepth, viewData);
     }
     code.deleteCharAt(code.length() - 1);
-    if (viewData.type == ViewData.TYPE_LINEAR_LAYOUT) {
+    if (viewData.type == ViewData.TYPE_LINEAR_LAYOUT
+        || viewData.type == ViewData.TYPE_VSCROLL_VIEW
+        || viewData.type == ViewData.TYPE_HSCROLL_VIEW
+        || viewData.type == ViewData.TYPE_FRAME_LAYOUT) {
       addTagHeadCloser(true);
       for (ViewData child : viewsData) {
         if (child.parentId.equals(viewData.id)) {
@@ -90,7 +108,7 @@ public class XMLSourceCodeGenerator {
     addAttribute(
         depth,
         Attributes.LinearLayout.Orientation,
-        ViewEditorUtils.getOrientationString(viewData.layout.orientation));
+        ViewEditorUtils.orientationToString(viewData.layout.orientation));
   }
 
   private void addTextViewAttributes(int depth, ViewData viewData) {
@@ -114,26 +132,26 @@ public class XMLSourceCodeGenerator {
     int bottom = viewData.paddingBottom;
 
     if (left == right && top == bottom && left > 0) {
-      addAttribute(depth, Attributes.View.Padding, ViewEditorUtils.getLayoutParamsString(left));
+      addAttribute(depth, Attributes.View.Padding, ViewEditorUtils.layoutParamsToString(left));
       return;
     }
 
     if (left > 0) {
-      addAttribute(depth, Attributes.View.PaddingLeft, ViewEditorUtils.getLayoutParamsString(left));
+      addAttribute(depth, Attributes.View.PaddingLeft, ViewEditorUtils.layoutParamsToString(left));
     }
 
     if (top > 0) {
-      addAttribute(depth, Attributes.View.PaddingTop, ViewEditorUtils.getLayoutParamsString(top));
+      addAttribute(depth, Attributes.View.PaddingTop, ViewEditorUtils.layoutParamsToString(top));
     }
 
     if (right > 0) {
       addAttribute(
-          depth, Attributes.View.PaddingRight, ViewEditorUtils.getLayoutParamsString(right));
+          depth, Attributes.View.PaddingRight, ViewEditorUtils.layoutParamsToString(right));
     }
 
     if (bottom > 0) {
       addAttribute(
-          depth, Attributes.View.PaddingBottom, ViewEditorUtils.getLayoutParamsString(bottom));
+          depth, Attributes.View.PaddingBottom, ViewEditorUtils.layoutParamsToString(bottom));
     }
   }
 

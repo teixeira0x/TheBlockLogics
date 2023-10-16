@@ -13,7 +13,7 @@ class TextViewPaletteItem(): PaletteItem(
 ) {
   override fun createViewData(): ViewData {
     return ViewData(ViewData.TYPE_TEXT_VIEW).apply {
-        text.text = "TextView"
+        text.text = name
       }
   }
 }
@@ -25,7 +25,7 @@ class EditTextPaletteItem(): PaletteItem(
 ) {
   override fun createViewData(): ViewData {
     return ViewData(ViewData.TYPE_EDIT_TEXT).apply {
-        text.hint = "EditText"
+        text.hint = name
       }
   }
 }
@@ -37,7 +37,7 @@ class ButtonPaletteItem(): PaletteItem(
 ) {
   override fun createViewData(): ViewData {
     return ViewData(ViewData.TYPE_BUTTON).apply {
-        text.text = "Button"
+        text.text = name
       }
   }
 }

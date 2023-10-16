@@ -14,6 +14,7 @@ public class EditTextItem extends EditText implements ViewItem {
   public EditTextItem(Context context, ViewData data) {
     super(context);
     this.data = data;
+    setCursorVisible(false);
     setFocusable(false);
   }
 

@@ -43,15 +43,18 @@ public class Constants {
   public static final String SP = "sp";
 
   // Properties
-  public static final String ID = "id";
-  public static final String WIDTH = "width";
-  public static final String HEIGHT = "height";
-  public static final String PADDING = "padding";
-  public static final String ORIENTATION = "orientation";
-  public static final String TEXT = "text";
-  public static final String HINT = "hint";
+  public static final String PROPERTY_ID = "id";
+  public static final String PROPERTY_WIDTH = "width";
+  public static final String PROPERTY_HEIGHT = "height";
+  public static final String PROPERTY_PADDING = "padding";
+  public static final String PROPERTY_ORIENTATION = "orientation";
+  public static final String PROPERTY_GRAVITY = "gravity";
+  public static final String PROPERTY_LAYOUT_GRAVITY = "layout gravity";
+  public static final String PROPERTY_TEXT = "text";
+  public static final String PROPERTY_HINT = "hint";
 
   // Others
+  public static final String NONE = "none";
   public static final String UNKNOWN = "Unknown";
   public static final String UNDEFINED = "Undefined";
 }

@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import com.blankj.utilcode.util.SizeUtils;
 import com.google.android.material.R.attr;
 import com.google.android.material.color.MaterialColors;
@@ -14,14 +14,14 @@ import com.raredev.theblocklogics.editor.view.views.LayoutItem;
 import com.raredev.theblocklogics.editor.view.views.ViewItem;
 import com.raredev.theblocklogics.utils.Constants;
 
-public class LinearLayoutItem extends LinearLayout implements LayoutItem {
+public class FrameLayoutItem extends FrameLayout implements LayoutItem {
 
   private final Rect rect = new Rect();
   private Paint paint;
 
   private ViewData data;
 
-  public LinearLayoutItem(Context context, ViewData data) {
+  public FrameLayoutItem(Context context, ViewData data) {
     super(context);
     this.data = data;
     setMinimumWidth(Constants.LAYOUT_MIN_SIZE);

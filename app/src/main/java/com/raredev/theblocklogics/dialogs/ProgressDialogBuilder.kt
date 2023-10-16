@@ -11,14 +11,8 @@ import com.raredev.theblocklogics.databinding.LayoutProgressDialogBinding
 
 class ProgressDialogBuilder(val context: Context) {
 
-  private var builder: MaterialAlertDialogBuilder
-  private var binding: LayoutProgressDialogBinding
-
-  init {
-    binding = LayoutProgressDialogBinding.inflate(LayoutInflater.from(context))
-    builder = MaterialAlertDialogBuilder(context)
-    builder.setView(binding.root)
-  }
+  private val binding = LayoutProgressDialogBinding.inflate(LayoutInflater.from(context))
+  private val builder = MaterialAlertDialogBuilder(context).setView(binding.root)
 
   fun getDialogBuilder(): MaterialAlertDialogBuilder {
     return this.builder;

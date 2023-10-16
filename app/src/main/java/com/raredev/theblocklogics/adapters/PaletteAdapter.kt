@@ -12,13 +12,7 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.VibrateUtils
 import com.raredev.theblocklogics.R
 import com.raredev.theblocklogics.databinding.LayoutPalleteItemBinding
-import com.raredev.theblocklogics.editor.view.palette.ButtonPaletteItem
-import com.raredev.theblocklogics.editor.view.palette.CategoryPaletteItem
-import com.raredev.theblocklogics.editor.view.palette.EditTextPaletteItem
-import com.raredev.theblocklogics.editor.view.palette.LinearHPaletteItem
-import com.raredev.theblocklogics.editor.view.palette.LinearVPaletteItem
-import com.raredev.theblocklogics.editor.view.palette.PaletteItem
-import com.raredev.theblocklogics.editor.view.palette.TextViewPaletteItem
+import com.raredev.theblocklogics.editor.view.palette.*
 
 public class PaletteAdapter(
   val drawerLayout: DrawerLayout,
@@ -70,6 +64,9 @@ public class PaletteAdapter(
     palette.add(CategoryPaletteItem(StringUtils.getString(R.string.category_layouts)))
     palette.add(LinearHPaletteItem())
     palette.add(LinearVPaletteItem())
+    palette.add(HScrollViewPaletteItem())
+    palette.add(ScrollViewPaletteItem())
+    palette.add(FrameLayoutPaletteItem())
 
     palette.add(CategoryPaletteItem(StringUtils.getString(R.string.category_widgets)))
     palette.add(TextViewPaletteItem())

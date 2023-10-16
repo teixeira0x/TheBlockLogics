@@ -76,7 +76,7 @@ class ViewFragment: Fragment(), SavableFragment, View.OnDragListener {
       DragEvent.ACTION_DROP -> {
         binding.deleteImage.setImageResource(R.drawable.ic_delete)
         if (removeView) {
-          binding.viewEditor.removeDraggedEditorView()
+          binding.viewEditor.removeDraggedView()
         }
         return true
       }
@@ -104,8 +104,7 @@ class ViewFragment: Fragment(), SavableFragment, View.OnDragListener {
   private fun selectFile(selectedFileName: String?) {
     selectedFileName?.let {
       saveFileData(viewModel.previousSelectedFileName)
-      binding.viewEditor.setSelectedLayoutName("$it")
-      binding.viewEditor.onSelectedFile(ProjectDataManager.getView(selectedFileName))
+      binding.viewEditor.onChangeSelectedFile(ProjectDataManager.getView(selectedFileName))
       logger.d("Layout: $it loaded!");
     }
   }

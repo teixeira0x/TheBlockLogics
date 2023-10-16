@@ -6,8 +6,10 @@ public class Property {
   public static final int TYPE_WIDTH = 1;
   public static final int TYPE_HEIGHT = 2;
   public static final int TYPE_PADDING = 3;
-  public static final int TYPE_TEXT = 4;
-  public static final int TYPE_HINT= 5;
+  public static final int TYPE_GRAVITY = 4;
+  public static final int TYPE_LAYOUT_GRAVITY = 5;
+  public static final int TYPE_TEXT = 6;
+  public static final int TYPE_HINT = 7;
 
   private int type;
 

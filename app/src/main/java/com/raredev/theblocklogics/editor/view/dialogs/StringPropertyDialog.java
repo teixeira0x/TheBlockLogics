@@ -5,7 +5,7 @@ import android.text.Editable;
 import android.view.LayoutInflater;
 import com.raredev.theblocklogics.R;
 import com.raredev.theblocklogics.databinding.DialogEditTextBinding;
-import com.raredev.theblocklogics.editor.view.ViewEditorLayout;
+import com.raredev.theblocklogics.editor.view.ViewEditor;
 import com.raredev.theblocklogics.editor.view.utils.PropertiesApplicator;
 import com.raredev.theblocklogics.editor.view.utils.ViewEditorUtils;
 import com.raredev.theblocklogics.editor.view.views.LayoutItem;
@@ -16,10 +16,10 @@ import com.raredev.theblocklogics.utils.OnTextChangedWatcher;
 public class StringPropertyDialog extends PropertyDialog {
 
   private DialogEditTextBinding binding;
-  private ViewEditorLayout editor;
+  private ViewEditor editor;
 
   public StringPropertyDialog(
-      Context context, ViewEditorLayout editor, ViewItem viewItem, Property property) {
+      Context context, ViewEditor editor, ViewItem viewItem, Property property) {
     super(context, viewItem, property);
     this.editor = editor;
     binding = DialogEditTextBinding.inflate(LayoutInflater.from(context));
@@ -56,7 +56,7 @@ public class StringPropertyDialog extends PropertyDialog {
     }
     PropertiesApplicator.applyViewProperties(viewItem);
     if (viewItem instanceof LayoutItem) {
-      ((LayoutItem) viewItem).refreshChilds();
+      ((LayoutItem) viewItem).rebuildChildren();
     }
   }
 

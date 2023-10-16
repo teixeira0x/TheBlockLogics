@@ -1,46 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    app:cardElevation="0dp"
-    app:cardBackgroundColor="?attr/colorOnSurfaceInverse"
-    android:layout_marginTop="8dp"
-    app:cardCornerRadius="8dp">
+    android_layout_marginTop="5dp"
+    android:padding="8dp"
+    android:foreground="@drawable/ripple_effect">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:padding="8dp"
-        android:foreground="@drawable/ripple_effect">
+        android:layout_width="0dp"
+        android:gravity="start"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:maxLines="1"
+        android:id="@+id/name" />
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:gravity="start"
-            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="16sp"
-            android:layout_marginLeft="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:maxLines="1"
-            android:id="@+id/name" />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:gravity="start"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="13sp"
+        android:layout_marginLeft="5dp"
+        android:textColor="?attr/colorSecondaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        android:id="@+id/value" />
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:gravity="start"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="13sp"
-            android:layout_marginLeft="5dp"
-            android:textColor="?attr/colorSecondaryVariant"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:maxLines="1"
-            app:layout_constraintTop_toBottomOf="@+id/name"
-            android:id="@+id/value" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

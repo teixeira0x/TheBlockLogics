@@ -67,7 +67,7 @@ public class MainActivity: BaseActivity() {
   }
 
   private fun onChangeSelectedFragment(fragmentIndex: Int?) {
-    var selectedFragment = when (fragmentIndex) {
+    val selectedFragment = when (fragmentIndex) {
       Constants.HOME_FRAGMENT -> binding.home
       Constants.SETTINGS_FRAGMENT -> binding.settings
       else -> throw IllegalArgumentException("Invalid fragment: $fragmentIndex")

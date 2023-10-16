@@ -30,6 +30,7 @@ public class ViewData implements Parcelable {
   public String parentId;
   public String id;
 
+  public int parentType;
   public int type;
 
   public int width;
@@ -56,7 +57,7 @@ public class ViewData implements Parcelable {
     text = new TextData();
   }
 
-  public void setAllPadding(int padding) {
+  public void setPadding(int padding) {
     this.paddingLeft = padding;
     this.paddingTop = padding;
     this.paddingRight = padding;
@@ -80,6 +81,7 @@ public class ViewData implements Parcelable {
   public ViewData(Parcel parcel) {
     parentId = parcel.readString();
     id = parcel.readString();
+    parentType = parcel.readInt();
     type = parcel.readInt();
     width = parcel.readInt();
     height = parcel.readInt();
@@ -100,6 +102,7 @@ public class ViewData implements Parcelable {
   public void writeToParcel(Parcel parcel, int args) {
     parcel.writeString(parentId);
     parcel.writeString(id);
+    parcel.writeInt(parentType);
     parcel.writeInt(type);
     parcel.writeInt(width);
     parcel.writeInt(height);

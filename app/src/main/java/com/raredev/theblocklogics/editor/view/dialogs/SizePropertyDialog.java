@@ -3,6 +3,7 @@ package com.raredev.theblocklogics.editor.view.dialogs;
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,16 +54,23 @@ public class SizePropertyDialog extends PropertyDialog {
           }
         });
 
-    var savedValue = property.getValue();
+    var savedValue = getSavedValue();
 
-    if (savedValue.equals(Constants.MATCH_PARENT)) {
+    if (savedValue == ViewGroup.LayoutParams.MATCH_PARENT) {
       binding.rbMatchParent.setChecked(true);
-    } else if (savedValue.equals(Constants.WRAP_CONTENT)) {
+    } else if (savedValue == ViewGroup.LayoutParams.WRAP_CONTENT) {
       binding.rbWrapContent.setChecked(true);
     } else {
-      binding.includeEditText.textInputEditText.setText(savedValue.replace("dp", ""));
+      binding.includeEditText.textInputEditText.setText("" + savedValue);
       binding.rbFixedValue.setChecked(true);
     }
+  }
+
+  public int getSavedValue() {
+    if (property.getType() == Property.TYPE_WIDTH) {
+      return viewItem.getViewData().width;
+    }
+    return viewItem.getViewData().height;
   }
 
   @Override
@@ -90,9 +98,6 @@ public class SizePropertyDialog extends PropertyDialog {
     }
 
     PropertiesApplicator.applyViewProperties(viewItem);
-    if (viewItem instanceof LayoutItem) {
-      ((LayoutItem) viewItem).refreshChilds();
-    }
   }
 
   private void checkErrors() {

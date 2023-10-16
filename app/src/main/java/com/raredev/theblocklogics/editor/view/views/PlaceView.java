@@ -19,7 +19,7 @@ public class PlaceView extends View {
   }
 
   public void defineStateLayoutParams(Object state) {
-    var placeViewParams = getLayoutParams();
+    /*var placeViewParams = getLayoutParams();
     if (state instanceof ViewItem) {
       var draggedView = ((ViewItem) state).getView();
       var draggedViewParams = draggedView.getLayoutParams();
@@ -38,7 +38,7 @@ public class PlaceView extends View {
       placeViewParams.width = 100;
       placeViewParams.height = 50;
     }
-    setLayoutParams(placeViewParams);
+    setLayoutParams(placeViewParams);*/
   }
 
   public void removeFromParent() {
